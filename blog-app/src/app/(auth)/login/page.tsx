@@ -20,11 +20,11 @@ const Login = () => {
   const handleSubmit = async (values: { email: string; password: string }) => {
     try {
       await handleLogin(values.email, values.password);
-      router.push("/blogs/list");
     } catch (error) {
       setError("Login failed. Please try again.");
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">

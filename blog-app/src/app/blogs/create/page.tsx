@@ -8,16 +8,21 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "../../../hooks/useAuth";
 
 export default function CreateBlog() {
-  const { user } = useAuth(); // Get current authenticated user
+  const { user } = useAuth();
   const router = useRouter();
   const [error, setError] = useState("");
 
-  const handleFileChange = async (event, setFieldValue) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+    setFieldValue: (field: string, value: any) => void
+  ) => {
     try {
-      const file = event.target.files[0]; 
-      console.log(file, "Selected file");
-      if (file) {
-        const response = await fileUpload(file); 
+      const files = event.target.files; 
+      if (files && files[0]) {
+        const file = files[0];
+        console.log(file, "Selected file");
+  
+        const response = await fileUpload(file);
         if (response && response.result) {
           setFieldValue("blogImage", response.result);
           console.log("File uploaded successfully, URL:", response.result);
@@ -31,6 +36,7 @@ export default function CreateBlog() {
     }
   };
   
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-lg bg-white rounded-lg shadow-lg p-8">
@@ -39,7 +45,10 @@ export default function CreateBlog() {
 
         <Formik
           initialValues={{
-           
+            title: "",
+            content: "",
+            tag: "",
+            blogImage: "",
             featured: false,
           }}
           validationSchema={blogValidationSchema}

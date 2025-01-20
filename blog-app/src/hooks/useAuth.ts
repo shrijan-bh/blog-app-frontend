@@ -6,12 +6,10 @@ import { setCookie, getCookie, deleteCookie } from "@/utils/cookies";
 export const useAuth = () => {
   const [user, setUser] = useState<any>(null);
   const router = useRouter();
-
-
   useEffect(() => {
     const token = getCookie("authToken");
     if (token) {
-      setUser({ token });  // Set user state based on token
+      setUser({ token });  
     }
   }, []);
   
@@ -20,10 +18,11 @@ export const useAuth = () => {
     try {
       const data = await login(email, password);
       setUser(data.user); 
-      setCookie("authToken", data.token, 7);  // Store token in cookies
-      router.push("/blogs/list");  // Redirect to the list page after successful login
+      setCookie("authToken", data.token, 7);  
+      router.push("/blogs/list"); 
     } catch (error) {
       console.error("Login error", error);
+      return;
     }
   };
 
@@ -37,9 +36,9 @@ export const useAuth = () => {
   };
 
   const handleLogout = () => {
-    deleteCookie("authToken");  // Clear token from cookies
-    setUser(null);  // Clear user state
-    router.push("/login");  // Redirect to login page after logout
+    deleteCookie("authToken");  
+    setUser(null);  
+    router.push("/login"); 
   };
   
 

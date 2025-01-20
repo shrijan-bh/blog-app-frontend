@@ -22,9 +22,8 @@ const BlogDetailPage = () => {
   const handleDelete = async () => {
     if (id) {
       try {
-        // Calling deleteBlog function from blogService
         await deleteBlog(id as string); 
-        router.push("/blogs/list"); // Redirect to the blog list page after deletion
+        router.push("/blogs/list"); 
       } catch (error) {
         console.error("Error deleting blog:", error);
       }
@@ -35,7 +34,6 @@ const BlogDetailPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      {/* Displaying Image */}
       {blog.blogImage && (
         <div className="mb-4">
           <img 
