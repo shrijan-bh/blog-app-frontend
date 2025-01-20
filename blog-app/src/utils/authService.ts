@@ -28,5 +28,5 @@ export const register = async (fullName: string, email: string, password: string
 
 export const isAuthenticated = (): boolean => {
   const token = getCookie("authToken");
-  return !!token; // Return true if token exists, otherwise false
+  return !!token; 
 };

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { isAuthenticated } from "@/utils/authService";
-import BlogList from "./(blogs)/list/page";
+import BlogList from "./blogs/list/page";
 import Login from "./(auth)/login/page";
 
 export default function Home() {
